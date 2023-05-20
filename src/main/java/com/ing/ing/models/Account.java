@@ -2,6 +2,9 @@ package com.ing.ing.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public final class Account implements Comparable<Account> {
     private String account;
     private int debitCount = 0;
@@ -40,7 +43,7 @@ public final class Account implements Comparable<Account> {
     }
     @JsonProperty("balance")
     public double getBalance() {
-        return this.balance;
+        return BigDecimal.valueOf(this.balance).setScale(2, RoundingMode.FLOOR).doubleValue();
     }
 
     public void add(double balance) {
